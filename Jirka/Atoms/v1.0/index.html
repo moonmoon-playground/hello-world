@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <style>
+table {
+	border-collapse: collapse;
+}
+
+table, td {
+	border: 1px solid #999;
+	padding: 2px;
+}
+
+td{
+	width: 30px;
+	padding:5px;
+	text-align:center;
+
+}
+
+tr{
+	height: 30px;
+}
+
+.bluecell{
+	background-color: lightblue;
+}
+
+.greencell{
+	background-color: lightgreen;
+}
+
+.blankcell{
+	background-color: white;
+}
+</style>
+
+
+    <script>
+window.onload=function() {
+    document.getElementById('tablearea').appendChild( populateTable(20, 20) );
+};
+
+document.addEventListener("click", function(e) {
+    var node = e.target;
+    if (node.nodeName == "TD") {
+        node.innerHTML = "";
+        if (node.className=="greencell") node.className="blankcell"
+        else node.className = "greencell";
+    }
+});
+
+
+function populateTable(rows, cells) {
+	var blue=0;
+    var table = document.createElement('table');
+    for (var i = 0; i < rows; ++i) {
+        var row = document.createElement('tr');
+        for (var j = 0; j < cells; ++j) {
+            row.appendChild(document.createElement('td'));
+			var color=getRandomInt(1, 9);
+			if (color>7){
+			    blue++;
+				row.cells[j].appendChild(document.createTextNode(blue));
+				row.cells[j].className = "bluecell";
+			}
+
+        }
+        table.appendChild(row);
+    }
+    return table;
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+</script>
+
+</head>
+<body>
+
+<div id="tablearea"> </div>
+
+
+
+</body></html>
+
+
